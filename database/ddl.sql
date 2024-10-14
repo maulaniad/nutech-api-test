@@ -8,7 +8,8 @@ CREATE TABLE users (
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     email VARCHAR(100) not null unique,
-    password VARCHAR(128),
+    password VARCHAR(255),
+    avatar VARCHAR(255),
 
     created_at TIMESTAMP default CURRENT_TIMESTAMP,
     updated_at TIMESTAMP default CURRENT_TIMESTAMP,
