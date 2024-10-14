@@ -16,13 +16,16 @@
   "author": "Mameng Galuh",
   "license": "ISC",
   "dependencies": {
+    "change-case-object": "^2.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "pg": "^8.13.0",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
+    "@types/change-case-object": "^2.0.3",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.7.5",
