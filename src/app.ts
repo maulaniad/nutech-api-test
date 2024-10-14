@@ -1,16 +1,24 @@
-import express, { Express, Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 
+import { caseConverterMiddleware } from "@middlewares/converter";
+import membershipRouter from "@routes/membership.routes";
+import { sendResponse } from "@utils/response";
 
-const app: Express = express();
-const port = process.env.PORT ?? 3000;
 
-app.use(morgan(":method :url Params: :req[body] :response-time ms"));
+const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+app.use(express.json());
+app.use(morgan("[server]  :method :url Params: :req[body] :response-time ms"));
+app.use(caseConverterMiddleware);
+
+app.use("/membership", membershipRouter);
+
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+    sendResponse(res, null, 404, "Resource tidak ditemukan di server (Invalid method / route)");
 });
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+app.listen(3000, () => {
+    console.log("[server]  server is running at http://localhost:3000");
 });
