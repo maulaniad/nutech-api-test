@@ -1,7 +1,7 @@
 import { camelCase, snakeCase } from "change-case-object";
 
 
-export const caseConverterMiddleware = (req: any, res: any, next: any) => {
+const caseConverterMiddleware = (req: any, res: any, next: any) => {
     if (req.body && typeof req.body === "object") {
         req.body = camelCase(req.body);
     }
@@ -24,3 +24,5 @@ export const caseConverterMiddleware = (req: any, res: any, next: any) => {
 
     next();
 };
+
+export { caseConverterMiddleware };
