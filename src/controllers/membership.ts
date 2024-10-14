@@ -5,17 +5,29 @@ import { sendResponse } from "@utils/response";
 import { makePassword } from "@utils/password";
 
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const normalizeEmail = (email: string) => {
+    const [localPart, domainPart] = email.toLowerCase().split("@");
+    return `${localPart}@${domainPart}`;
+}
+
 const createMembership = async (req: Request, res: Response) => {
     const { email, firstName, lastName, password } = req.body;
 
-    const result = await MembershipRepo.getMembershipByEmail(email);
+    if (!emailRegex.test(email)) {
+        sendResponse(res, null, 400, "Parameter email tidak sesuai format");
+        return;
+    }
+
+    const result = await MembershipRepo.getMembershipByEmail(normalizeEmail(email));
     if (result) {
         sendResponse(res, null, 400, "Email sudah terdaftar");
         return;
     }
 
     const membership = await MembershipRepo.createMembership(
-        email,
+        normalizeEmail(email),
         firstName,
         lastName,
         await makePassword(password)
@@ -26,7 +38,7 @@ const createMembership = async (req: Request, res: Response) => {
         return;
     }
 
-    sendResponse(res, membership, 200, "Registrasi berhasil silahkan login");
+    sendResponse(res, null, 200, "Registrasi berhasil silahkan login");
 };
 
 export { createMembership };
