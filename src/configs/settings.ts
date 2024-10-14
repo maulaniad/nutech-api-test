@@ -13,5 +13,9 @@ export default {
 
     // Auth Settings
     jwt_secret: process.env.SECRET_KEY!,
-    jwt_expire: "2h"
+    jwt_expire: "2h",
+
+    // App Settings
+    app_port: process.env.APP_PORT ?? 3000,
+    console_format: "[server]  :method :url Params: :req[body] :response-time ms"
 };
