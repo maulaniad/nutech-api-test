@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { sendResponse } from "@utils/response";
 
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const validateMembershipRegistrationPayload = (req: Request, res: Response, next: NextFunction) => {
     if (!req.body) {
@@ -17,7 +18,33 @@ const validateMembershipRegistrationPayload = (req: Request, res: Response, next
         return;
     }
 
+    if (!emailRegex.test(email)) {
+        sendResponse(res, null, 400, "Parameter email tidak sesuai format");
+        return;
+    }
+
     next();
 }
 
-export { validateMembershipRegistrationPayload };
+const validateMembershipLoginPayload = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.body) {
+        sendResponse(res, null, 400, "Request body kosong");
+        return;
+    }
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        sendResponse(res, null, 400, "Data tidak lengkap");
+        return;
+    }
+
+    if (!emailRegex.test(email)) {
+        sendResponse(res, null, 400, "Parameter email tidak sesuai format");
+        return;
+    }
+
+    next();
+}
+
+export { validateMembershipRegistrationPayload, validateMembershipLoginPayload };

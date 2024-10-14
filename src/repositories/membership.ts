@@ -2,12 +2,26 @@ import db from "@configs/database";
 
 
 class MembershipRepo {
+    /**
+    * Get user object personalized for common usage.
+    **/
     static readonly getUser = async (param: string, value: any) => {
         const sql = `SELECT oid, email, first_name, last_name, profile_image FROM users WHERE "${param}" = $1`;
         const params = [value];
 
         const result = await db.query(sql, params);
         return result;
+    }
+
+    /**
+    * Get user object with all attributes/columns from the database.
+    **/
+    static readonly getUserObject = async (param: string, value: any) => {
+        const sql = `SELECT * FROM users WHERE "${param}" = $1`;
+        const params = [value];
+
+        const result = await db.query(sql, params);
+        return result.rows[0];
     }
 
     static readonly getMembershipByEmail = async (email: string) => {
