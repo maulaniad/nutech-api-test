@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import MembershipRepo from "@repositories/membership";
+import UserRepo from "@repositories/user";
 import { sendResponse } from "@utils/response";
 import { generateToken } from "@utils/token";
 import { makePassword, checkPassword } from "@utils/password";
@@ -11,16 +11,16 @@ const normalizeEmail = (email: string) => {
     return `${localPart}@${domainPart}`;
 }
 
-const createMembership = async (req: Request, res: Response) => {
+const membershipRegistration = async (req: Request, res: Response) => {
     const { email, firstName, lastName, password } = req.body;
 
-    const result = await MembershipRepo.getMembershipByEmail(normalizeEmail(email));
+    const result = await UserRepo.getUserByEmail(normalizeEmail(email));
     if (result) {
         sendResponse(res, null, 400, "Email sudah terdaftar");
         return;
     }
 
-    const membership = await MembershipRepo.createMembership(
+    const membership = await UserRepo.createUser(
         normalizeEmail(email),
         firstName,
         lastName,
@@ -35,17 +35,16 @@ const createMembership = async (req: Request, res: Response) => {
     sendResponse(res, null, 200, "Registrasi berhasil silahkan login");
 };
 
-const loginMembership = async (req: Request, res: Response) => {
+const membershipLogin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const membership = await MembershipRepo.getUserObject("email", normalizeEmail(email));
+    const membership = await UserRepo.getUserObject("email", normalizeEmail(email));
     if (!membership) {
         sendResponse(res, null, 400, "Email atau password salah");
         return;
     }
 
-    const result = await checkPassword(password, membership.password);
-    if (!result) {
+    if (!await checkPassword(password, membership.password)) {
         sendResponse(res, null, 400, "Email atau password salah");
         return;
     }
@@ -54,4 +53,9 @@ const loginMembership = async (req: Request, res: Response) => {
     sendResponse(res, { token: token }, 200, "Login sukses");
 }
 
-export { createMembership, loginMembership };
+const membershipProfile = async (req: Request, res: Response) => {
+    const membership = await UserRepo.getUserByEmail(req.user.email);
+    sendResponse(res, membership, 200, "Sukses");
+}
+
+export { membershipRegistration, membershipLogin, membershipProfile };

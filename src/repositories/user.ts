@@ -1,9 +1,9 @@
 import db from "@configs/database";
 
 
-class MembershipRepo {
+class UserRepo {
     /**
-    * Get user object personalized for common usage.
+    * Get user object personalized for membership usage.
     **/
     static readonly getUser = async (param: string, value: any) => {
         const sql = `SELECT oid, email, first_name, last_name, profile_image FROM users WHERE "${param}" = $1`;
@@ -24,7 +24,7 @@ class MembershipRepo {
         return result.rows[0];
     }
 
-    static readonly getMembershipByEmail = async (email: string) => {
+    static readonly getUserByEmail = async (email: string) => {
         const result = await this.getUser("email", email);
         if (result.rows.length <= 0) {
             return null;
@@ -33,7 +33,7 @@ class MembershipRepo {
         return result.rows[0];
     }
 
-    static readonly getMembershipByOid = async (oid: string) => {
+    static readonly getUserByOID = async (oid: string) => {
         const result = await this.getUser("oid", oid);
         if (result.rows.length <= 0) {
             return null;
@@ -42,7 +42,7 @@ class MembershipRepo {
         return result.rows[0]
     }
 
-    static readonly createMembership = async (
+    static readonly createUser = async (
         email: string,
         firstName: string,
         lastName: string,
@@ -64,4 +64,4 @@ class MembershipRepo {
     };
 }
 
-export default MembershipRepo;
+export default UserRepo;
