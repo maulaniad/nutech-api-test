@@ -47,4 +47,24 @@ const validateMembershipLoginPayload = (req: Request, res: Response, next: NextF
     next();
 }
 
-export { validateMembershipRegistrationPayload, validateMembershipLoginPayload };
+const validateMembershipProfileUpdatePayload = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.body) {
+        sendResponse(res, null, 400, "Request body kosong");
+        return;
+    }
+
+    const { firstName, lastName } = req.body;
+
+    if (!firstName && !lastName) {
+        sendResponse(res, null, 400, "Tidak ada data yang perlu diupdate");
+        return;
+    }
+
+    next();
+}
+
+export {
+    validateMembershipRegistrationPayload,
+    validateMembershipLoginPayload,
+    validateMembershipProfileUpdatePayload
+};

@@ -58,4 +58,20 @@ const membershipProfile = async (req: Request, res: Response) => {
     sendResponse(res, membership, 200, "Sukses");
 }
 
-export { membershipRegistration, membershipLogin, membershipProfile };
+const membershipProfileUpdate = async (req: Request, res: Response) => {
+    let { firstName, lastName } = req.body;
+
+    const currentMembership = await UserRepo.getUserByEmail(req.user.email);
+    if (!currentMembership) {
+        sendResponse(res, null, 400, "User tidak valid");
+        return;
+    }
+
+    if (!firstName) firstName = currentMembership.first_name;
+    if (!lastName) lastName = currentMembership.last_name;
+
+    const updatedMembership = await UserRepo.updateUser(firstName, lastName, currentMembership.email);
+    sendResponse(res, updatedMembership, 200, "Sukses");
+}
+
+export { membershipRegistration, membershipLogin, membershipProfile, membershipProfileUpdate };

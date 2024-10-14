@@ -62,6 +62,27 @@ class UserRepo {
 
         return result.rows[0];
     };
+
+    static readonly updateUser = async (
+        firstName: string,
+        lastName: string,
+        email: string | null = null,
+        oid: string | null = null
+    ) => {
+        const sql = `
+            UPDATE users SET first_name = $1, last_name = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE email = $3 OR oid = $4
+            RETURNING oid, email, first_name, last_name, profile_image
+        `;
+        const params = [firstName, lastName, email, oid];
+
+        const result = await db.query(sql, params);
+        if (result.rows.length <= 0) {
+            return null;
+        }
+
+        return result.rows[0];
+    };
 }
 
 export default UserRepo;
