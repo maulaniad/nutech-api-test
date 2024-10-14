@@ -1,14 +1,13 @@
-import dotenv from "dotenv";
 import { Pool } from "pg";
 
+import settings from "@configs/settings";
 
-dotenv.config();
 
-const host = process.env.DB_HOST ?? "localhost";
-const port = process.env.DB_PORT ?? 5432;
-const user = process.env.DB_USER ?? "postgres";
-const password = process.env.DB_PASS ?? "";
-const database = process.env.DB_NAME ?? "nutech";
+const host = settings.db_host ?? "localhost";
+const port = settings.db_port ?? 5432;
+const user = settings.db_user ?? "postgres";
+const password = settings.db_pass ?? "";
+const database = settings.db_name ?? "nutech";
 
 const pool = new Pool({
     host: host,
