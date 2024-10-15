@@ -7,20 +7,17 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const validateMembershipRegistrationPayload = (req: Request, res: Response, next: NextFunction) => {
     if (!req.body) {
-        sendResponse(res, null, 400, "Request body kosong");
-        return;
+        return sendResponse(res, null, 400, "Request body kosong");
     }
 
     const { email, firstName, lastName, password } = req.body;
 
     if (!email || !firstName || !lastName || !password) {
-        sendResponse(res, null, 400, "Data tidak lengkap");
-        return;
+        return sendResponse(res, null, 400, "Request body tidak lengkap");
     }
 
     if (!emailRegex.test(email)) {
-        sendResponse(res, null, 400, "Parameter email tidak sesuai format");
-        return;
+        return sendResponse(res, null, 400, "Parameter email tidak sesuai format");
     }
 
     next();
@@ -28,20 +25,17 @@ const validateMembershipRegistrationPayload = (req: Request, res: Response, next
 
 const validateMembershipLoginPayload = (req: Request, res: Response, next: NextFunction) => {
     if (!req.body) {
-        sendResponse(res, null, 400, "Request body kosong");
-        return;
+        return sendResponse(res, null, 400, "Request body kosong");
     }
 
     const { email, password } = req.body;
 
     if (!email || !password) {
-        sendResponse(res, null, 400, "Data tidak lengkap");
-        return;
+        return sendResponse(res, null, 400, "Data tidak lengkap");
     }
 
     if (!emailRegex.test(email)) {
-        sendResponse(res, null, 400, "Parameter email tidak sesuai format");
-        return;
+        return sendResponse(res, null, 400, "Parameter email tidak sesuai format");
     }
 
     next();
@@ -49,15 +43,25 @@ const validateMembershipLoginPayload = (req: Request, res: Response, next: NextF
 
 const validateMembershipProfileUpdatePayload = (req: Request, res: Response, next: NextFunction) => {
     if (!req.body) {
-        sendResponse(res, null, 400, "Request body kosong");
-        return;
+        return sendResponse(res, null, 400, "Request body kosong");
     }
 
     const { firstName, lastName } = req.body;
 
     if (!firstName && !lastName) {
-        sendResponse(res, null, 400, "Tidak ada data yang perlu diupdate");
-        return;
+        return sendResponse(res, null, 400, "Tidak ada data yang perlu diupdate");
+    }
+
+    next();
+}
+
+const validateMembershipProfileImagePayload = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.is("multipart/form-data")) {
+        return sendResponse(res, null, 400, "Request body harus menggunakan multipart/form-data");
+    }
+
+    if (!req.file) {
+        return sendResponse(res, null, 400, "Request body kosong");
     }
 
     next();
@@ -66,5 +70,6 @@ const validateMembershipProfileUpdatePayload = (req: Request, res: Response, nex
 export {
     validateMembershipRegistrationPayload,
     validateMembershipLoginPayload,
-    validateMembershipProfileUpdatePayload
+    validateMembershipProfileUpdatePayload,
+    validateMembershipProfileImagePayload
 };

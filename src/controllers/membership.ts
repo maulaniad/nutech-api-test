@@ -69,4 +69,19 @@ const membershipProfileUpdate = async (req: Request, res: Response) => {
     return sendResponse(res, updatedMembership, 200, "Sukses");
 }
 
-export { membershipRegistration, membershipLogin, membershipProfile, membershipProfileUpdate };
+const membershipProfileImageUpdate = async (req: Request, res: Response) => {
+    if (!req.file) {
+        return sendResponse(res, null, 500, "File tidak ditemukan / server error");
+    }
+
+    const membership = await UserRepo.updateUserProfileImage(req.file.path, req.user.email);
+    return sendResponse(res, membership, 200, "Sukses");
+}
+
+export {
+    membershipRegistration,
+    membershipLogin,
+    membershipProfile,
+    membershipProfileUpdate,
+    membershipProfileImageUpdate
+};

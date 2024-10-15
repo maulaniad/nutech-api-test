@@ -4,8 +4,10 @@ import {
     membershipRegistration,
     membershipLogin,
     membershipProfile,
-    membershipProfileUpdate
+    membershipProfileUpdate,
+    membershipProfileImageUpdate
 } from "@controllers/membership";
+import { upload } from "@middlewares/membership/upload";
 import {
     validateMembershipRegistrationPayload,
     validateMembershipLoginPayload,
@@ -20,5 +22,6 @@ router.post("/registration", [validateMembershipRegistrationPayload], membership
 router.post("/login", [validateMembershipLoginPayload], membershipLogin);
 router.get("/profile", [jwtAuth], membershipProfile);
 router.put("/profile/update", [jwtAuth, validateMembershipProfileUpdatePayload], membershipProfileUpdate);
+router.put("/profile/image", [jwtAuth, upload.single("file")], membershipProfileImageUpdate);
 
 export default router;
