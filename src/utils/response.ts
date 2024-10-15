@@ -5,10 +5,11 @@ const sendResponse = (
     res: Response,
     data: object | Array<any> | null = null,
     status: number = 200,
-    message: string = "OK"
+    message: string = "OK",
+    internalStatus: number = 0,
 ) => {
     res.status(status).json({
-        status: status,
+        status: internalStatus,
         message: message,
         data: data
     });
