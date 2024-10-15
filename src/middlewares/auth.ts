@@ -14,6 +14,7 @@ const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
     const validToken = verifyToken(token);
     if (!validToken) {
         sendResponse(res, null, 401, "Token tidak valid atau kedaluwarsa");
+        return;
     }
 
     req.user = validToken;
