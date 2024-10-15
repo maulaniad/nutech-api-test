@@ -17,5 +17,6 @@ export default {
 
     // App Settings
     app_port: process.env.APP_PORT ?? 3000,
+    app_upload_dir: "uploads/",
     console_format: "[server]  :method :url Params: :req[body] :response-time ms"
 };
