@@ -6,15 +6,13 @@ import { verifyToken } from "@utils/token";
 
 const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
     if (!req.headers.authorization) {
-        sendResponse(res, null, 401, "Token tidak ditemukan");
-        return;
+        return sendResponse(res, null, 401, "Token tidak ditemukan");
     }
 
     const token = req.headers.authorization.split(" ")[1];
     const validToken = verifyToken(token);
     if (!validToken) {
-        sendResponse(res, null, 401, "Token tidak valid atau kedaluwarsa");
-        return;
+        return sendResponse(res, null, 401, "Token tidak valid atau kedaluwarsa");
     }
 
     req.user = validToken;

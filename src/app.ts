@@ -16,13 +16,13 @@ app.use(caseConverterMiddleware);
 app.use(errorHandlerMiddleware);
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
-    sendResponse(res, null, 200, "Hello, this API was built by Mameng Galuh");
+    return sendResponse(res, null, 200, "Hello, this API was built by Mameng Galuh");
 })
 
 app.use("/membership", membershipRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-    sendResponse(res, null, 404, "Resource tidak ditemukan di server (Invalid method / route)");
+    return sendResponse(res, null, 404, "Resource tidak ditemukan di server (Invalid method / route)");
 });
 
 app.listen(settings.app_port, () => {

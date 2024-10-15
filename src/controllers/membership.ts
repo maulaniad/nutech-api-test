@@ -16,8 +16,7 @@ const membershipRegistration = async (req: Request, res: Response) => {
 
     const result = await UserRepo.getUserByEmail(normalizeEmail(email));
     if (result) {
-        sendResponse(res, null, 400, "Email sudah terdaftar");
-        return;
+        return sendResponse(res, null, 400, "Email sudah terdaftar");
     }
 
     const membership = await UserRepo.createUser(
@@ -28,11 +27,10 @@ const membershipRegistration = async (req: Request, res: Response) => {
     );
 
     if (!membership) {
-        sendResponse(res, null, 400, "Registrasi gagal");
-        return;
+        return sendResponse(res, null, 400, "Registrasi gagal");
     }
 
-    sendResponse(res, null, 200, "Registrasi berhasil silahkan login");
+    return sendResponse(res, null, 200, "Registrasi berhasil silahkan login");
 };
 
 const membershipLogin = async (req: Request, res: Response) => {
@@ -40,22 +38,20 @@ const membershipLogin = async (req: Request, res: Response) => {
 
     const membership = await UserRepo.getUserObject("email", normalizeEmail(email));
     if (!membership) {
-        sendResponse(res, null, 400, "Email atau password salah");
-        return;
+        return sendResponse(res, null, 400, "Email atau password salah");
     }
 
     if (!await checkPassword(password, membership.password)) {
-        sendResponse(res, null, 400, "Email atau password salah");
-        return;
+        return sendResponse(res, null, 400, "Email atau password salah");
     }
 
     const token = generateToken({ oid: membership.oid, email: membership.email });
-    sendResponse(res, { token: token }, 200, "Login sukses");
+    return sendResponse(res, { token: token }, 200, "Login sukses");
 }
 
 const membershipProfile = async (req: Request, res: Response) => {
     const membership = await UserRepo.getUserByEmail(req.user.email);
-    sendResponse(res, membership, 200, "Sukses");
+    return sendResponse(res, membership, 200, "Sukses");
 }
 
 const membershipProfileUpdate = async (req: Request, res: Response) => {
@@ -63,15 +59,14 @@ const membershipProfileUpdate = async (req: Request, res: Response) => {
 
     const currentMembership = await UserRepo.getUserByEmail(req.user.email);
     if (!currentMembership) {
-        sendResponse(res, null, 400, "User tidak valid");
-        return;
+        return sendResponse(res, null, 400, "User tidak valid");
     }
 
     if (!firstName) firstName = currentMembership.first_name;
     if (!lastName) lastName = currentMembership.last_name;
 
     const updatedMembership = await UserRepo.updateUser(firstName, lastName, currentMembership.email);
-    sendResponse(res, updatedMembership, 200, "Sukses");
+    return sendResponse(res, updatedMembership, 200, "Sukses");
 }
 
 export { membershipRegistration, membershipLogin, membershipProfile, membershipProfileUpdate };

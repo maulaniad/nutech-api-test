@@ -7,11 +7,12 @@ const sendResponse = (
     status: number = 200,
     message: string = "OK"
 ) => {
-    return res.status(status).json({
+    res.status(status).json({
         status: status,
         message: message,
         data: data
     });
+    return;
 };
 
 export { sendResponse };
