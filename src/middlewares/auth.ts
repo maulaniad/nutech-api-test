@@ -1,18 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 
-import { sendResponse } from "@utils/response";
 import { verifyToken } from "@utils/token";
+import { ValidationError, UnauthorizedError } from "@utils/error";
 
 
 const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
     if (!req.headers.authorization) {
-        return sendResponse(res, null, 401, "Token tidak ditemukan");
+        throw new ValidationError("Token tidak ditemukan");
     }
 
     const token = req.headers.authorization.split(" ")[1];
     const validToken = verifyToken(token);
     if (!validToken) {
-        return sendResponse(res, null, 401, "Token tidak valid atau kedaluwarsa");
+        throw new UnauthorizedError("Token tidak valid atau kedaluwarsa");
     }
 
     req.user = validToken;
