@@ -74,7 +74,8 @@ const membershipProfileImageUpdate = async (req: Request, res: Response) => {
         return sendResponse(res, null, 500, "File tidak ditemukan / server error");
     }
 
-    const membership = await UserRepo.updateUserProfileImage(req.file.path, req.user.email);
+    const normalizedFilePath = req.file.path.replace(/\\/g, "/");
+    const membership = await UserRepo.updateUserProfileImage(normalizedFilePath, req.user.email);
     return sendResponse(res, membership, 200, "Sukses");
 }
 
