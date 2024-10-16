@@ -21,7 +21,7 @@ app.use(caseConverterMiddleware);
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
     return sendResponse(res, null, 200, "Hello, this API was built by Mameng Galuh");
-})
+});
 
 app.use("/membership", membershipRouter);
 app.use("/information", bannerRouter);

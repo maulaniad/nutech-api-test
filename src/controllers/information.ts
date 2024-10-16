@@ -8,7 +8,7 @@ import { sendResponse } from "@utils/response";
 const listBanner = async (req: Request, res: Response) => {
     const result = await BannerRepo.getAllBanners({
         protocol: req.protocol,
-        host: req.get("host")!,
+        host: req.get("host")!
     });
     return sendResponse(res, result, 200, "Sukses");
 }
@@ -16,7 +16,7 @@ const listBanner = async (req: Request, res: Response) => {
 const listService = async (req: Request, res: Response) => {
     const result = await ServiceRepo.getAllServices({
         protocol: req.protocol,
-        host: req.get("host")!,
+        host: req.get("host")!
     });
     return sendResponse(res, result, 200, "Sukses");
 }
