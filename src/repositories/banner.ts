@@ -1,8 +1,13 @@
 import db from "@configs/database";
 
 
+interface HostInfo {
+    protocol: string;
+    host: string;
+}
+
 class BannerRepo {
-    static readonly getAllBanners = async (protocol: string, host: string) => {
+    static readonly getAllBanners = async (hostInfo: HostInfo) => {
         const result = await db.query(
             "SELECT oid, banner_name, banner_image, description FROM banners"
         );
@@ -10,7 +15,7 @@ class BannerRepo {
         const mappedResults = result.rows.map((row) => ({
             oid: row.oid,
             bannerName: row.banner_name,
-            bannerImage: `${protocol}://${host}/${row.banner_image}`,
+            bannerImage: `${hostInfo.protocol}://${hostInfo.host}/${row.banner_image}`,
             description: row.description,
         }));
 
