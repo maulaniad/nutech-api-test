@@ -51,7 +51,7 @@ class UserRepo {
         const sql = `
             INSERT INTO users (email, first_name, last_name, password)
             VALUES ($1, $2, $3, $4)
-            RETURNING oid, email, first_name, last_name, profile_image
+            RETURNING id, oid, email, first_name, last_name, profile_image
         `;
         const params = [email, firstName, lastName, password];
 

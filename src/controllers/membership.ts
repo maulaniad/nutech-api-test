@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import UserRepo from "@repositories/user";
+import WalletRepo from "@repositories/wallet";
 import { sendResponse } from "@utils/response";
 import { generateToken } from "@utils/token";
 import { makePassword, checkPassword } from "@utils/password";
@@ -27,6 +28,11 @@ const membershipRegistration = async (req: Request, res: Response) => {
     );
 
     if (!membership) {
+        return sendResponse(res, null, 400, "Registrasi gagal");
+    }
+
+    const resultWallet = await WalletRepo.createWallet(membership.id, "Main Wallet");
+    if (!resultWallet) {
         return sendResponse(res, null, 400, "Registrasi gagal");
     }
 
