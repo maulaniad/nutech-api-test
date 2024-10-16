@@ -7,6 +7,7 @@ import { caseConverterMiddleware } from "@middlewares/converter";
 import { errorHandlerMiddleware } from "@middlewares/error";
 import { uploadStorageMiddleware } from "@middlewares/storage";
 import membershipRouter from "@routes/membership.routes";
+import bannerRouter from "@routes/information.routes";
 import { sendResponse } from "@utils/response";
 
 
@@ -23,6 +24,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 })
 
 app.use("/membership", membershipRouter);
+app.use("/information", bannerRouter);
 
 app.use("/" + settings.app_upload_dir, express.static(
     path.join(__dirname, "../", settings.app_upload_dir)
