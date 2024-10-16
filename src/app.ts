@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
+import path from "path";
 
 import settings from "@configs/settings";
 import { caseConverterMiddleware } from "@middlewares/converter";
@@ -22,6 +23,10 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 })
 
 app.use("/membership", membershipRouter);
+
+app.use("/" + settings.app_upload_dir, express.static(
+    path.join(__dirname, "../", settings.app_upload_dir)
+));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     return sendResponse(res, null, 404, "Resource tidak ditemukan di server (Invalid method / route)");
