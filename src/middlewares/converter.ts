@@ -13,16 +13,16 @@ const caseConverterMiddleware = (req: Request, res: Response, next: NextFunction
         if (body && typeof body === "object") {
             body = snakeCase(body);
 
-            if (body && body.data && body.data.profile_image) {
-                body.data.profile_image = `${req.protocol}://${req.get("host")}/${body.data.profile_image}`
+            if (body?.data?.profile_image) {
+                body.data.profile_image = `${req.protocol}://${req.get("host")}/${body.data.profile_image}`;
             }
         }
 
         if (body && typeof body === "string") {
             body = JSON.parse(body);
 
-            if (body && body.data && body.data.profile_image) {
-                body.data.profile_image = `${req.protocol}://${req.get("host")}/${body.data.profile_image}`
+            if (body?.data?.profile_image) {
+                body.data.profile_image = `${req.protocol}://${req.get("host")}/${body.data.profile_image}`;
             }
 
             body = snakeCase(body);
