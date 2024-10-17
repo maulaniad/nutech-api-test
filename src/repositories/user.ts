@@ -6,8 +6,12 @@ class UserRepo {
     * Get user object personalized for membership usage.
     **/
     static readonly getUser = async (param: string, value: any) => {
-        const sql = `SELECT oid, email, first_name, last_name, profile_image FROM users WHERE "${param}" = $1`;
+        let sql = `SELECT oid, email, first_name, last_name, profile_image FROM users WHERE "${param}" = $1`;
         const params = [value];
+
+        if (param === "oid") {
+            sql += "::UUID"
+        }
 
         const result = await db.query(sql, params);
         return result;
