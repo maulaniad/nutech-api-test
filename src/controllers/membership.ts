@@ -28,12 +28,12 @@ const membershipRegistration = async (req: Request, res: Response) => {
     );
 
     if (!membership) {
-        return sendResponse(res, null, 400, "Registrasi gagal");
+        return sendResponse(res, null, 400, "Registrasi gagal (user)");
     }
 
     const resultWallet = await WalletRepo.createWallet(membership.id, "Main Wallet");
     if (!resultWallet) {
-        return sendResponse(res, null, 400, "Registrasi gagal");
+        return sendResponse(res, null, 400, "Registrasi gagal (wallet)");
     }
 
     return sendResponse(res, null, 200, "Registrasi berhasil silahkan login");

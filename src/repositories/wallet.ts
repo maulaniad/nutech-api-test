@@ -33,7 +33,10 @@ class WalletRepo {
     }
 
     static readonly createWallet = async (idUser: number, walletName: string) => {
-        const sql = "INSERT INTO wallets (id_user, wallet_name) VALUES ($1, $2)";
+        const sql = `
+            INSERT INTO wallets (id_user, wallet_name) VALUES ($1, $2)
+            RETURNING oid, wallet_name, balance
+        `;
         const params = [idUser, walletName];
 
         const result = await db.query(sql, params);
