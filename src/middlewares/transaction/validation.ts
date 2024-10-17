@@ -2,6 +2,18 @@ import { ValidationError } from "@utils/error";
 import { Request, Response, NextFunction } from "express";
 
 
+const validateTransactionPayload = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.body) {
+        throw new ValidationError("Request body kosong", 400);
+    }
+
+    if (!req.body.serviceCode) {
+        throw new ValidationError("Parameter service_code harus diisi", 400);
+    }
+
+    next();
+}
+
 const validateTransactionTopUpPayload = (req: Request, res: Response, next: NextFunction) => {
     if (!req.body) {
         throw new ValidationError("Request body kosong", 400);
@@ -20,4 +32,4 @@ const validateTransactionTopUpPayload = (req: Request, res: Response, next: Next
     next();
 }
 
-export { validateTransactionTopUpPayload };
+export { validateTransactionPayload, validateTransactionTopUpPayload };
