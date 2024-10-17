@@ -3,7 +3,10 @@ import db from "@configs/database";
 
 class WalletRepo {
     static readonly getWalletByUser = async (idUser: number) => {
-        const sql = "SELECT * FROM wallets WHERE id_user = $1";
+        const sql = `
+            SELECT oid, wallet_name, balance FROM wallets
+            WHERE id_user = $1 ORDER BY created_at DESC
+        `;
         const params = [idUser];
 
         const result = await db.query(sql, params);
@@ -11,7 +14,10 @@ class WalletRepo {
     }
 
     static readonly getWalletByOID = async (oid: string) => {
-        const sql = "SELECT * FROM wallets WHERE oid = $1";
+        const sql = `
+            SELECT oid, wallet_name, balance FROM wallets
+            WHERE oid = $1 ORDER BY created_at DESC
+        `;
         const params = [oid];
 
         const result = await db.query(sql, params);
@@ -24,6 +30,14 @@ class WalletRepo {
 
         const result = await db.query(sql, params);
         return result;
+    }
+
+    static readonly updateWalletBalance = async (oid: string, balance: number) => {
+        const sql = "UPDATE wallets SET balance = $1 WHERE oid = $2::UUID RETURNING balance";
+        const params = [balance, oid];
+
+        const result = await db.query(sql, params);
+        return result.rows[0];
     }
 }
 

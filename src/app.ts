@@ -8,6 +8,7 @@ import { errorHandlerMiddleware } from "@middlewares/error";
 import { uploadStorageMiddleware } from "@middlewares/storage";
 import membershipRouter from "@routes/membership.routes";
 import bannerRouter from "@routes/information.routes";
+import transactionRouter from "@routes/transaction.routes";
 import { sendResponse } from "@utils/response";
 
 
@@ -25,6 +26,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 app.use("/membership", membershipRouter);
 app.use("/information", bannerRouter);
+app.use("/transaction", transactionRouter);
 
 app.use("/" + settings.app_upload_dir, express.static(
     path.join(__dirname, "../", settings.app_upload_dir)
