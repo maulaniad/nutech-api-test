@@ -19,6 +19,10 @@ class BannerRepo {
             description: row.description,
         }));
 
+        if (mappedResults.length <= 0) {
+            return null;
+        }
+
         return mappedResults;
     }
 }

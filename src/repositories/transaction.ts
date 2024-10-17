@@ -24,6 +24,10 @@ class TransactionRepo {
         }
 
         const result = await db.query(sql);
+        if (result.rows.length <= 0) {
+            return null;
+        }
+
         return result.rows;
     }
 
@@ -32,7 +36,7 @@ class TransactionRepo {
             INSERT INTO transactions (
                 id_service, id_user, invoice_number, transaction_type, total_amount
             ) VALUES ($1, $2, $3, $4, $5)
-            RETURNING oid, invoice_number, transaction_type, total_amount
+            RETURNING oid, invoice_number, transaction_type, total_amount, created_at
         `;
         const params = [
             data.idService,
@@ -43,6 +47,10 @@ class TransactionRepo {
         ];
 
         const result = await db.query(sql, params);
+        if (result.rows.length <= 0) {
+            return null;
+        }
+
         return result.rows[0];
     }
 }

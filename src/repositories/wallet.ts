@@ -10,6 +10,10 @@ class WalletRepo {
         const params = [idUser];
 
         const result = await db.query(sql, params);
+        if (result.rows.length <= 0) {
+            return null;
+        }
+
         return result.rows;
     }
 
@@ -21,6 +25,10 @@ class WalletRepo {
         const params = [oid];
 
         const result = await db.query(sql, params);
+        if (result.rows.length <= 0) {
+            return null;
+        }
+
         return result.rows[0];
     }
 
@@ -29,6 +37,10 @@ class WalletRepo {
         const params = [idUser, walletName];
 
         const result = await db.query(sql, params);
+        if (result.rows.length <= 0) {
+            return null;
+        }
+
         return result;
     }
 
@@ -37,6 +49,10 @@ class WalletRepo {
         const params = [balance, oid];
 
         const result = await db.query(sql, params);
+        if (result.rows.length <= 0) {
+            return null;
+        }
+
         return result.rows[0];
     }
 }
