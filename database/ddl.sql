@@ -70,6 +70,7 @@ create table transactions (
 
     invoice_number VARCHAR(25) not null,
     transaction_type VARCHAR(25) not null,
+    description VARCHAR(255),
     total_amount INT4 not null,
 
     created_at TIMESTAMP default CURRENT_TIMESTAMP,
