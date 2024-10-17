@@ -23,7 +23,7 @@ create table wallets (
     id_user INT4 not null,
 
     wallet_name VARCHAR(15) default 'PRIMARY' not null,
-    balance INT8 default 0 not null,
+    balance INT4 default 0 not null,
 
     created_at TIMESTAMP default CURRENT_TIMESTAMP,
     updated_at TIMESTAMP default CURRENT_TIMESTAMP,
