@@ -1,0 +1,21 @@
+{
+	"id": "0cc95bab-fd6b-488d-abbb-169fa8ae0838",
+	"name": "[ENV] Nutech Test (Local)",
+	"values": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-10-17T15:35:18.944Z",
+	"_postman_exported_using": "Postman/11.17.2-241016-0848"
+}

@@ -1,0 +1,776 @@
+{
+	"info": {
+		"_postman_id": "ea7ca762-a072-4371-a65e-93549225d821",
+		"name": "[API] Nutech Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31077474",
+		"_collection_link": "https://private-mameng.postman.co/workspace/Local-Collections~77ea4b61-d4cb-4b80-8527-3c0cf8fdf393/collection/31077474-ea7ca762-a072-4371-a65e-93549225d821?action=share&source=collection_link&creator=31077474"
+	},
+	"item": [
+		{
+			"name": "Membership",
+			"item": [
+				{
+					"name": "POST Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"maulani.ad@gmail.com\",\r\n    \"first_name\": \"Adrian\",\r\n    \"last_name\": \"Maulani\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/membership/registration",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"membership",
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"maulani.ad@gmail.com\",\r\n    \"first_name\": \"Adrian\",\r\n    \"last_name\": \"Maulani\",\r\n    \"password\": \"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/membership/registration",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"membership",
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-O9g3lPlvvno41lgxj6C7VY42WmI\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Oct 2024 16:47:52 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"Registrasi berhasil silahkan login\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"const token = response.data.token;\r",
+									"\r",
+									"pm.environment.set('TOKEN', token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"maulani.ad@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/membership/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"membership",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"maulani.ad@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/membership/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"membership",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"120-Z6XjowwHNsqzEVAM/e8PDZGJV9E\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Oct 2024 17:15:28 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"Login sukses\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvaWQiOiIzODQ5MjYwOC05MzkyLTRmMmUtODM5My1iZjFiZDg0NjA5OTAiLCJlbWFpbCI6Im1hdWxhbmkuYWRAZ21haWwuY29tIiwiaWF0IjoxNzI4OTI2MTI4LCJleHAiOjE3Mjg5MzMzMjh9.6SZZ4vZYNzbBRpV_U68llmgniGikSVxSGbbEwsRkfKE\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GET Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/membership/profile",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"membership",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/membership/profile",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"membership",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-h8sVcA8y2MpWByrOMhkRFCwrIcI\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Oct 2024 17:15:30 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"Sukses\",\n    \"data\": {\n        \"oid\": \"38492608-9392-4f2e-8393-bf1bd8460990\",\n        \"email\": \"maulani.ad@gmail.com\",\n        \"first_name\": \"Adrian\",\n        \"last_name\": \"Maulani\",\n        \"profile_image\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT Profile Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Adrian\",\r\n    \"last_name\": \"Maulani\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/membership/profile/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"membership",
+								"profile",
+								"update"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT Profile Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Adrian\",\r\n    \"last_name\": \"Maulani\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/membership/profile/update",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"membership",
+										"profile",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-h8sVcA8y2MpWByrOMhkRFCwrIcI\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Oct 2024 18:15:45 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"Sukses\",\n    \"data\": {\n        \"oid\": \"38492608-9392-4f2e-8393-bf1bd8460990\",\n        \"email\": \"maulani.ad@gmail.com\",\n        \"first_name\": \"Adrian\",\n        \"last_name\": \"Maulani\",\n        \"profile_image\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT Profile Image Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "C:\\Users\\takiy\\Downloads\\Aef-removebg-preview.png"
+								}
+							],
+							"options": {
+								"formdata": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/membership/profile/image",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"membership",
+								"profile",
+								"image"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT Profile Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Adrian\",\r\n    \"last_name\": \"Maulani\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/membership/profile/update",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"membership",
+										"profile",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-h8sVcA8y2MpWByrOMhkRFCwrIcI\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Oct 2024 18:15:45 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"Sukses\",\n    \"data\": {\n        \"oid\": \"38492608-9392-4f2e-8393-bf1bd8460990\",\n        \"email\": \"maulani.ad@gmail.com\",\n        \"first_name\": \"Adrian\",\n        \"last_name\": \"Maulani\",\n        \"profile_image\": null\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Information",
+			"item": [
+				{
+					"name": "GET List Banner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/information/banner",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"information",
+								"banner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET List Services",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/information/services",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"information",
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "GET Balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/transaction/balance",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"transaction",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Topup Wallet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"top_up_amount\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/transaction/topup",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"transaction",
+								"topup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Create Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_code\": \"PLN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/transaction/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"transaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Transaction History",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/transaction/history?offset=0&limit=3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"transaction",
+								"history"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET Greet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}",
+					"host": [
+						"{{BASE_URL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

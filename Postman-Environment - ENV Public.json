@@ -1,0 +1,21 @@
+{
+	"id": "a1be436a-4f70-418f-88d3-7ce4e6431327",
+	"name": "[ENV] Nutech Test (Railway)",
+	"values": [
+		{
+			"key": "BASE_URL",
+			"value": "https://nutech-api-test-production.up.railway.app",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-10-17T15:35:24.416Z",
+	"_postman_exported_using": "Postman/11.17.2-241016-0848"
+}
