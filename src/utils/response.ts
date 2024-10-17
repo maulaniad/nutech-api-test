@@ -13,7 +13,6 @@ const sendResponse = (
         message: message,
         data: data
     });
-    return;
 };
 
 export { sendResponse };
