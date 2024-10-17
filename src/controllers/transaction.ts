@@ -52,4 +52,23 @@ const topUp = async (req: Request, res: Response) => {
     return sendResponse(res, result, 200, "Top Up Balance Berhasil");
 }
 
-export { getCurrentBalance, topUp };
+const transactionHistory = async (req: Request, res: Response) => {
+    const { limit, offset } = req.query;
+    let queryLimit: number = 0;
+    let queryOffset: number = 0;
+
+    if (limit)
+        queryLimit = Number(limit);
+    if (offset)
+        queryOffset = Number(offset);
+
+    const result = await TransactionRepo.getAllTransactions(queryLimit, queryOffset);
+    return sendResponse(res, {
+            offset: queryOffset,
+            limit: queryLimit,
+            records: result
+        }, 200, "Get Transactions Berhasil"
+    );
+}
+
+export { getCurrentBalance, topUp, transactionHistory };

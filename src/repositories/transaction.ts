@@ -10,10 +10,17 @@ interface Transaction {
 }
 
 class TransactionRepo {
-    static readonly getAllTransactions = async (limit: number | null) => {
-        let sql = "SELECT * FROM transactions ORDER BY created_at DESC";
+    static readonly getAllTransactions = async (limit: number | null, offset: number | null) => {
+        let sql = `
+            SELECT oid, invoice_number, transaction_type, description, total_amount, created_at FROM transactions
+            ORDER BY created_at DESC
+        `;
         if (limit) {
             sql += ` LIMIT ${limit}`;
+
+            if (offset) {
+                sql += ` OFFSET ${offset}`;
+            }
         }
 
         const result = await db.query(sql);
